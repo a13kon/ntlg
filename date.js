@@ -27,7 +27,8 @@ const argv = yargs(hideBin(process.argv))
        
     console.log(argv._);
 
-    if (argv._ == "current") {
+    switch (argv._[0]) {
+        case "current":
         console.log("CURRENT");
         if (argv.year == true) {
             date = date.getFullYear();
@@ -41,12 +42,15 @@ const argv = yargs(hideBin(process.argv))
             date = date.toISOString();
         }
         console.log(date)
-    }
-    else if (argv._ == "add") {
+        break;
+    
+    case "add": (argv._ == "add") 
         console.log("ADD");
-        console.log(date);
-    }
-    else {
+        console.log(date, argv._[1]);
+        break;
+    
+    default:
         console.log("wrong command");
+        break;
     };
     
