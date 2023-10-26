@@ -1,11 +1,21 @@
 {
   "name": "netology",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "bin": {
+    "simple-date": "date.js",
+    "easy-sum": "sum.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js",
+    "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "yargs": "^17.7.2"
+  },
+  "description": ""
 }
