@@ -1,37 +1,36 @@
 #!/usr/bin/env node
 
 const { match } = require('assert');
-const readlineSync = require('readline-sync');
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
 const num = Math.floor(Math.random() * 100);
-var answer;
 var msg = "Загадано число в диапазоне от 0 до 100";
-
 console.log(msg);
-while (answer != num) {
-    answer = readlineSync.question();
-    if (answer > num) {
-        msg = "Больше";
+
+readline.on('line',(input) => {
+    if (Number.isInteger(+input)){
+        if (input > num) {
+            msg = "Больше";
+        }
+        else if (input < num) {
+            msg = "Меньше";
+        }
+        else {
+            msg = `Отгадано число ${num}`;
+            readline.close();
+        }
+       
     }
-    else if (answer < num) {
-        msg = "Меньше";
+    else if (input == "end"){
+        msg = `Было загадано число ${num}`;
+        readline.close();
     }
     else {
-        msg =`Отгадано число ${num}`;
+        msg = "Введите целое число. Для выхода введите end.";
+        
     }
     console.log(msg);
-};  
-
-
-// console.log("Загадано число в диапазоне от 0 до 100\n" + result);
-// while (result!= num) {
-//     rl.question(msg, (answer) => {
-//         if (Number.isInteger(answer)) {
-            
-//         } 
-//         else {
-//             console.log("Введите целое число!"); 
-//         }
-//         rl.close();
-//     });
-// };
+})
