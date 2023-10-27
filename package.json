@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "bin": {
-    "simple-date": "date.js",
-    "easy-sum": "sum.js"
+    "guess": "guessNum.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,6 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "readline": "^1.3.0",
+    "readline-sync": "^1.4.10",
     "yargs": "^17.7.2"
   },
   "description": ""
