@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 
-console.log(new Date())
+//1.2 1 done
+//1.2 2 done
