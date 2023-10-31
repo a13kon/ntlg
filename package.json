@@ -1,5 +1,5 @@
 {
-  "name": "netology",
+  "name": "guessnum-a13kon",
   "version": "1.0.0",
   "main": "index.js",
   "bin": {
@@ -8,9 +8,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prepublishOnly": "eslint 'src/**/*.{js,ts}'"
   },
-  "author": "",
+  "author": "a13kon",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
@@ -18,5 +19,19 @@
     "readline-sync": "^1.4.10",
     "yargs": "^17.7.2"
   },
-  "description": ""
+  "description": "guess the number",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a13kon/ntlg.git"
+  },
+  "keywords": [
+    "guess",
+    "number",
+    "a13kon"
+  ],
+  "bugs": {
+    "url": "https://github.com/a13kon/ntlg/issues"
+  },
+  "homepage": "https://github.com/a13kon/ntlg#readme"
 }
