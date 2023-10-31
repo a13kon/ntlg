@@ -6,6 +6,7 @@ const readline = require('readline').createInterface({
     output: process.stdout
 });
 
+let debug;
 const num = Math.floor(Math.random() * 100);
 var msg = "Загадано число в диапазоне от 0 до 100";
 console.log(msg);
