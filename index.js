@@ -1,19 +1,9 @@
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
+const data = require('./file.json');
+console.log(data.prop1);
 
-const argv = yargs(hideBin(process.argv))
-    .option('params1',{ 
-        alias: "p1",
-        type: "boolean",
-        description: "params 1 desc",
-        default: "true"
-    })
-    .option('params2',{ 
-        alias: "p2",
-        type: "string",
-        description: "params 2 desc",
-        default: "def params 2"
-    })
-    .argv;
+const {demo, hello}  = require('./demo');
+console.log(demo());
+console.log(hello());
 
-console.log(argv);
+const os = requre('node:os');
+console.log(os.arch());
