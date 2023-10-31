@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+module.exports = function guess() {
+
 const { match } = require('assert');
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -35,3 +37,4 @@ readline.on('line',(input) => {
     }
     console.log(msg);
 })
+};
