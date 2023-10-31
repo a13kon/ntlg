@@ -5,5 +5,5 @@ const {demo, hello}  = require('./demo');
 console.log(demo());
 console.log(hello());
 
-const os = requre('node:os');
-console.log(os.arch());
+const os = require('node:os');
+console.log(os.tmpdir());
