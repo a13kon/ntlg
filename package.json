@@ -1,7 +1,7 @@
 {
   "name": "guessnum-a13kon",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "1.0.1",
+  "main": "guessNum.js",
   "bin": {
     "cmd": "guessNum.js"
   },
