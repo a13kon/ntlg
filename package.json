@@ -1,36 +1,11 @@
 {
-  "name": "guessnum-a13kon",
-  "version": "1.0.1",
-  "main": "guessNum.js",
-  "bin": {
-    "cmd": "guessNum.js"
-  },
+  "name": "ntlg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node server.js",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "a13kon",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "readline": "^1.3.0",
-    "readline-sync": "^1.4.10",
-    "yargs": "^17.7.2"
-  },
-  "description": "guess the number",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/a13kon/ntlg.git"
-  },
-  "keywords": [
-    "guess",
-    "number",
-    "a13kon"
-  ],
-  "bugs": {
-    "url": "https://github.com/a13kon/ntlg/issues"
-  },
-  "homepage": "https://github.com/a13kon/ntlg#readme"
+  "author": "",
+  "license": "ISC"
 }
