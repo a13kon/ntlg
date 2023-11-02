@@ -1,36 +1,68 @@
+#!/usr/bin/env node
+
+const yargs = require('yargs');
+const { hideBin } = require('yargs/helpers');
+const readline = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+const { match } = require('assert');
 const fs = require('fs');
 const path = require('path');
+const argv = yargs(hideBin(process.argv)).argv;
 
-// console.log(path.parse(__filename));
-// console.log(path.join(__filename, 'test', '..', '//demo.txt'));
+const regExp = /\*|\\|\/|:|\?|"|<|>|\|/g;
 
-const dir = path.join(__dirname, 'demo');
+try{
+    if (argv._[0] != undefined) {
+        let file = String(argv._[0]);
+        file = file.replace(regExp, '');
 
-// fs.mkdir(dir, (err) => {
-//     try {
-//         if (err) throw Error(err);
-//         console.log('ok');
-//     } catch (e) {
-//         if (err.errno == -4075) console.log('file already exist');
-//         else console.log(err);
-//     }
-// })
+        if (file.length > 100) {
+            file = file.slice(0, 100);
+        } ;
 
-const file = path.join(__dirname, 'demo', 'new.txt');
-const content = 'new content \n';
+        while(file[file.length-1] == '+') {
+            file = file.slice(0, -1);
+        };
+        if (file == '') {
+            throw new Error("Некорректное имя файла.");
+        } else {
+            file = file + '.txt';
+        };
+        
+        fs.writeFile(file, '', (err) => {
+            if (err) throw new Error("Ошибка при создании файла");
+        });
 
-// fs.writeFile(file, content, (err) => {
-//         if (err) throw Error(err);
-//         console.log('ok');
-// })
+        let num, msg, content;
 
+        console.log("Орел или решка? (Орел - 1, решка - 2, выход - stop)");
 
-fs.appendFile(file, content, (err) => {
-    if (err) throw Error(err);
-    console.log('ok');
-})
-
-fs.readFile(file, 'utf-8', (err, data) => {
-    if (err) throw Error(err);
-    console.log(data);
-})
+        readline.on('line',(input) => {
+            num = Number(Math.random() > 0.5) + 1;
+            if (input == 1 ||input == 2) {
+                if (input == num) {
+                    content = 'win, \n';
+                    msg = 'Победа! Орел или решка?';
+                } else {
+                    content = 'lose, \n';
+                    msg = 'Поражение. Орел или решка?';
+                };
+            } else if (input == 'stop'){
+                content = 'end\n';
+                msg = '';
+                readline.close();
+            } else {
+                content = ''
+                msg = 'Неправильный ввод. (Орел - 1, решка - 2, выход - stop)\nОрел или решка?';
+            };
+            fs.appendFile(file, content, (err) => {
+                if (err) throw new Error("Ошибка при записи лога");
+            });
+            console.log(msg);
+        });
+    } else readline.close();
+} catch (e) {
+    console.log(e.message);
+}
