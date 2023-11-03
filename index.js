@@ -43,14 +43,14 @@ try{
             num = Number(Math.random() > 0.5) + 1;
             if (input == 1 ||input == 2) {
                 if (input == num) {
-                    content = 'win, \n';
+                    content = 'win:';
                     msg = 'Победа! Орел или решка?';
                 } else {
-                    content = 'lose, \n';
+                    content = 'lose:';
                     msg = 'Поражение. Орел или решка?';
                 };
             } else if (input == 'stop'){
-                content = 'end\n';
+                content = '';
                 msg = '';
                 readline.close();
             } else {
