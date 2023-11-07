@@ -6,9 +6,11 @@
     "cmd": "guessNum.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node http-module.js",
     "server": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node -r dotenv/config http-module.js"
+
   },
   "author": "a13kon",
   "license": "ISC",
@@ -19,7 +21,9 @@
     "yargs": "^17.7.2"
   },
   "description": "guess the number",
-  "devDependencies": {},
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/a13kon/ntlg.git"
