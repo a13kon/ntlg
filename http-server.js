@@ -20,7 +20,7 @@ const getAllOperationsComponent = (operations = []) => {
               <a class="btn btn-sm btn-danger" href="/delete?id=${id}">удалить</a>
             </td>
         </tr>
-       `)
+        `)
   }).join('');
 
   return (`
