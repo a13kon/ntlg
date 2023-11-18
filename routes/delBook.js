@@ -9,6 +9,7 @@ router.delete('/:id', (req, res) => {
 
     if (idx !== -1) {
         book.splice(idx, 1);
+        res.json(book);
     } else {
         res.status(404);
         res.json('404 | not found'); // переделать

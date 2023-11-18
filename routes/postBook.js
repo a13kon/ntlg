@@ -10,6 +10,7 @@ class Book {
         favorite = false, 
         fileCover = "", 
         fileName = "",
+        fileBook = "",
         id = uuid()) {
             this.id = id;
             this.title = title;
@@ -18,14 +19,15 @@ class Book {
             this.favorite = favorite;
             this.fileCover = fileCover;
             this.fileName = fileName;
+            this.fileBook = fileBook
     };
 };
 
 router.post('/', (req, res) => {
     const {book} = app.stor;
-    const {title, description, authors, favorite, fileCover, fileName} = req.body;
+    const {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body;
 
-    const newBook = new Book(title, description, authors, favorite, fileCover, fileName);
+    const newBook = new Book(title, description, authors, favorite, fileCover, fileName, fileBook);
     book.push(newBook);
 
     res.status(201);
