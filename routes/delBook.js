@@ -11,7 +11,7 @@ router.delete('/:id', (req, res) => {
         book.splice(idx, 1);
     } else {
         res.status(404);
-        res.json('404 | not found (del)'); //переделать на middleware
+        res.json('404 | not found'); // переделать
     }
 });
 
