@@ -2,6 +2,7 @@ const express = require('express');
 const getBook = require('./routes/getBook');
 const postBook = require('./routes/postBook');
 const getBookById = require('./routes/getBookById');
+const delBook = require('./routes/delBook');
 const error404 = require('./middleware/err-404');
 
 
@@ -20,6 +21,8 @@ app.stor = {
 app.use('/api/books', getBook);
 app.use('/api/books', getBookById);
 app.use('/api/books', postBook);
+app.use('/api/books', delBook);
+
 
 app.use(error404);
 
