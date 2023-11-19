@@ -1,13 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const fileMulter = require('../middleware/file');
 
-router.put('/:id', (req, res) => {
+router.put('/:id', fileMulter.single('fileBook'), (req, res) => {
     const {book} = app.stor;
     const {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body;
     const {id} = req.params;
     const idx = book.findIndex(el => el.id === id);
 
     if (idx !== -1) {
+
+        if(req.file){
+            const {path} = req.file;
+            book[idx].fileBook = path;
+        };
+
         book[idx] = {
             ...book[idx],
             title,
@@ -15,8 +22,7 @@ router.put('/:id', (req, res) => {
             authors,
             favorite,
             fileCover,
-            fileName,
-            fileBook 
+            fileName
         }; 
         res.json(book[idx]);
     } else {

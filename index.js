@@ -9,6 +9,7 @@ const error404 = require('./middleware/err-404');
 
 app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 app.stor = {
     book : []

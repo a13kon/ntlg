@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { v4: uuid} = require('uuid');
+const fileMulter = require('../middleware/file');
+
 
 class Book {
     constructor(
@@ -19,19 +21,27 @@ class Book {
             this.favorite = favorite;
             this.fileCover = fileCover;
             this.fileName = fileName;
-            this.fileBook = fileBook
+            this.fileBook = fileBook;
     };
 };
 
-router.post('/', (req, res) => {
-    const {book} = app.stor;
-    const {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body;
+router.post('/', fileMulter.single('fileBook'),
+(req, res) => {
+        const {book} = app.stor;
+        const {title, description, authors, favorite, fileCover, fileName} = req.body;
+    
+        const newBook = new Book(title, description, authors, favorite, fileCover, fileName);
 
-    const newBook = new Book(title, description, authors, favorite, fileCover, fileName, fileBook);
-    book.push(newBook);
+        if(req.file){
+            const {path} = req.file;
+            newBook.fileBook = path;
+        };
+      
+        book.push(newBook);
+    
+        res.status(201);
+        res.json(book);
 
-    res.status(201);
-    res.json(book);
 });
 
 module.exports = router;
