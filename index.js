@@ -1,5 +1,6 @@
 const obj = {
-    param1: []
+    param1: [],
+    param2: []
 };
 
 const {param1} = obj;
