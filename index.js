@@ -7,12 +7,6 @@ const putBook = require('./routes/putBook');
 const postLogin = require('./routes/postLogin');
 const error404 = require('./middleware/err-404');
 
-
-const email = {
-    id : 1,
-    mail : "test@mailru",
-}
-
 app = express();
 app.use(express.json());
 

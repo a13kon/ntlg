@@ -11,7 +11,7 @@ router.get('/:id', (req, res) => {
         res.json(book[idx]);
     } else {
         res.status(404);
-        res.json('404 | not found'); 
+        res.json('404 | not found'); // переделать
     }
 
 });
