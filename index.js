@@ -14,3 +14,5 @@ obj.param1.push(2000);
 
 console.log(obj);
 console.log(param1);
+cpnsole.log(param1.slice(0, 1));
+
