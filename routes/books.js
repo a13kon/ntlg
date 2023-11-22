@@ -2,28 +2,9 @@ const express = require('express');
 const router = express.Router();
 const {stor} = require('../storage/stor');
 const fileMulter = require('../middleware/file');
-const { v4: uuid} = require('uuid');
-    
-class Book {
-    constructor(
-        title = "", 
-        description = "", 
-        authors = "", 
-        favorite = false, 
-        fileCover = "", 
-        fileName = "",
-        fileBook = "",
-        id = uuid()) {
-            this.id = id;
-            this.title = title;
-            this.description = description;
-            this.authors = authors;
-            this.favorite = favorite;
-            this.fileCover = fileCover;
-            this.fileName = fileName;
-            this.fileBook = fileBook;
-    };
-};
+const {Book} = require('../storage/bookClass');
+ 
+
 
 router.get('/', (req, res) => {
     const {book} = stor;
@@ -39,7 +20,7 @@ router.get('/:id', (req, res) => {
         res.json(book[idx]);
     } else {
         res.status(404);
-        res.json('404 | not found'); // переделать
+        res.json('404 | not found'); 
     }
 
 });
@@ -54,7 +35,7 @@ router.delete('/:id', (req, res) => {
         res.json('deleted');
     } else {
         res.status(404);
-        res.json('404 | not found'); // переделать
+        res.json('404 | not found'); 
     }
 });
 
