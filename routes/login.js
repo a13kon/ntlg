@@ -6,7 +6,7 @@ const email = {
     mail : "test@mailru",
 };
 
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
     res.status(201);
     res.json(email);
 });
