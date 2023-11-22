@@ -3,16 +3,16 @@ const { v4: uuid} = require('uuid');
 class Book {
     constructor(
         title = "", 
-        description = "", 
+        desc = "", 
         authors = "", 
-        favorite = false, 
+        favorite = "", 
         fileCover = "", 
         fileName = "",
         fileBook = "",
         id = uuid()) {
             this.id = id;
             this.title = title;
-            this.description = description;
+            this.desc = desc;
             this.authors = authors;
             this.favorite = favorite;
             this.fileCover = fileCover;
