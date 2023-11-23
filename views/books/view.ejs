@@ -11,10 +11,15 @@
                 <h5 class="card-title"><%= book.title %></h5>
                 <p class="card-text"><%= book.desc %></p>
                 <p class="card-text"><%= book.authors %></p>
-                <p><%= book.favorite %> Избранное</p>
-                <p class="card-text"><%= book.fileBook %></p>
-
+                <p class="card-text"><%= book.fileCover %></p>
+                <p class="card-text"> <% if (book.favorite == 'true') { %>
+                        Избранное
+                    <%} %></p>
+                
                 <div class="text-right">
+                    <a class="btn btn-sm btn-info" href="/api/books/<%= book.id %>/download">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>
                     <a class="btn btn-sm btn-primary" href="/api/books/update/<%= book.id %>">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>

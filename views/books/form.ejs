@@ -1,4 +1,4 @@
-<form method="POST" class="mt-5">
+<form method="POST" class="mt-5" enctype="multipart/form-data">
     <div class="form-group">
         <label for="inputTitle">Заголовок</label>
         <input type="text"
@@ -26,14 +26,31 @@
                 id="inputDesc"
         ><%= book.desc %></textarea>
     </div>
+
+    <div class="form-group">
+        <label for="fileCover">Обложка</label>
+        <input type="text"
+                value="<%= book.fileCover %>"
+                name="fileCover"
+                class="form-control"
+                id="inputfileCover">
+    </div>
     
     <div class="form-check">
-        
+        <% if (book.favorite == 'true') { %>
         <input type="checkbox"
                 name="favorite"
                 value="true"
                 class="form-check-input"
+                id="checkBoxFavorite"
+                checked>
+        <%} else { %>
+            <input type="checkbox"
+                name="favorite"
+                value="true"
+                class="form-check-input"
                 id="checkBoxFavorite">
+        <% } %>
         <label class="form-check-label" for="checkBoxFavorite">Избранное</label>
     </div>
 
