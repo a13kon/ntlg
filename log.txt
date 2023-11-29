@@ -1,0 +1,110 @@
+ash@ubuntu:~/Projects/ntlg$ docker pull busybox
+Using default tag: latest
+latest: Pulling from library/busybox
+3f4d90098f5b: Pull complete 
+Digest: sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+ash@ubuntu:~/Projects/ntlg$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ash@ubuntu:~/Projects/ntlg$ docker i
+docker: 'i' is not a docker command.
+See 'docker --help'
+ash@ubuntu:~/Projects/ntlg$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+busybox      latest    a416a98b71e2   4 months ago   4.26MB
+ash@ubuntu:~/Projects/ntlg$ docker run --name pinger -it busybox ping netology.ru
+PING netology.ru (188.114.98.234): 56 data bytes
+64 bytes from 188.114.98.234: seq=0 ttl=55 time=3.800 ms
+64 bytes from 188.114.98.234: seq=1 ttl=55 time=3.412 ms
+64 bytes from 188.114.98.234: seq=2 ttl=55 time=4.922 ms
+64 bytes from 188.114.98.234: seq=3 ttl=55 time=3.608 ms
+64 bytes from 188.114.98.234: seq=4 ttl=55 time=5.192 ms
+64 bytes from 188.114.98.234: seq=5 ttl=55 time=5.197 ms
+64 bytes from 188.114.98.234: seq=6 ttl=55 time=6.303 ms
+64 bytes from 188.114.98.234: seq=7 ttl=55 time=5.285 ms
+64 bytes from 188.114.98.234: seq=8 ttl=55 time=5.174 ms
+64 bytes from 188.114.98.234: seq=9 ttl=55 time=5.035 ms
+64 bytes from 188.114.98.234: seq=10 ttl=55 time=5.620 ms
+64 bytes from 188.114.98.234: seq=11 ttl=55 time=5.527 ms
+64 bytes from 188.114.98.234: seq=12 ttl=55 time=6.426 ms
+
+64 bytes from 188.114.98.234: seq=13 ttl=55 time=4.949 ms
+64 bytes from 188.114.98.234: seq=14 ttl=55 time=4.924 ms
+^C
+--- netology.ru ping statistics ---
+15 packets transmitted, 15 packets received, 0% packet loss
+round-trip min/avg/max = 3.412/5.024/6.426 ms
+ash@ubuntu:~/Projects/ntlg$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS                      PORTS     NAMES
+02c22994a458   busybox   "ping netology.ru"   27 seconds ago   Exited (0) 11 seconds ago             pinger
+ash@ubuntu:~/Projects/ntlg$ docker stop pinger
+pinger
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS                      PORTS     NAMES
+02c22994a458   busybox   "ping netology.ru"   38 seconds ago   Exited (0) 22 seconds ago             pinger
+ash@ubuntu:~/Projects/ntlg$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ash@ubuntu:~/Projects/ntlg$ docker rm pinger
+pinger
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ash@ubuntu:~/Projects/ntlg$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+busybox      latest    a416a98b71e2   4 months ago   4.26MB
+ash@ubuntu:~/Projects/ntlg$ sudo ping -v
+[sudo] пароль для ash: 
+ping: usage error: Требуется указать адрес назначения
+ash@ubuntu:~/Projects/ntlg$ ping -c 10 ya.ru
+PING ya.ru (5.255.255.242) 56(84) bytes of data.
+64 bytes from ya.ru (5.255.255.242): icmp_seq=1 ttl=244 time=7.61 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=2 ttl=244 time=6.38 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=3 ttl=244 time=6.90 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=4 ttl=244 time=7.06 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=5 ttl=244 time=5.50 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=6 ttl=244 time=6.34 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=7 ttl=244 time=6.45 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=8 ttl=244 time=5.47 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=9 ttl=244 time=5.36 ms
+64 bytes from ya.ru (5.255.255.242): icmp_seq=10 ttl=244 time=5.49 ms
+
+--- ya.ru ping statistics ---
+10 packets transmitted, 10 received, 0% packet loss, time 9033ms
+rtt min/avg/max/mdev = 5.362/6.256/7.613/0.744 ms
+ash@ubuntu:~/Projects/ntlg$ docker run --name pinger -it busybox ping -c 3 netology.ru
+PING netology.ru (188.114.99.234): 56 data bytes
+64 bytes from 188.114.99.234: seq=0 ttl=54 time=3.524 ms
+64 bytes from 188.114.99.234: seq=1 ttl=54 time=3.403 ms
+64 bytes from 188.114.99.234: seq=2 ttl=54 time=4.731 ms
+
+--- netology.ru ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 3.403/3.886/4.731 ms
+ash@ubuntu:~/Projects/ntlg$ docker run --name pinger -it busybox ping -c 3 netology.ru
+docker: Error response from daemon: Conflict. The container name "/pinger" is already in use by container "7ff959066e7fa0887f2f114cc66878742d3df3084154c12593ad8ea642611a63". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+ash@ubuntu:~/Projects/ntlg$ docker run --name pinger -it busybox ping -c 3 netology.ru
+docker: Error response from daemon: Conflict. The container name "/pinger" is already in use by container "7ff959066e7fa0887f2f114cc66878742d3df3084154c12593ad8ea642611a63". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                      PORTS     NAMES
+7ff959066e7f   busybox   "ping -c 3 netology.…"   26 seconds ago   Exited (0) 23 seconds ago             pinger
+ash@ubuntu:~/Projects/ntlg$ docker rm pinger
+pinger
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+ash@ubuntu:~/Projects/ntlg$ docker run --name pinger -it busybox ping -c 3 netology.ru
+PING netology.ru (188.114.98.234): 56 data bytes
+64 bytes from 188.114.98.234: seq=0 ttl=55 time=3.546 ms
+64 bytes from 188.114.98.234: seq=1 ttl=55 time=3.747 ms
+64 bytes from 188.114.98.234: seq=2 ttl=55 time=5.304 ms
+
+--- netology.ru ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 3.546/4.199/5.304 ms
+^[[Aash@ubuntu:~/Projects/ntdocker rm pinger
+pinger
+ash@ubuntu:~/Projects/ntlg$ ^C
+ash@ubuntu:~/Projects/ntlg$ 
