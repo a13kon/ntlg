@@ -96,3 +96,4 @@ ash@ubuntu:~/Projects/ntlg$ docker ps -a
 ash@ubuntu:~/Projects/ntlg$ docker images
 
     REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+    

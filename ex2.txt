@@ -53,3 +53,4 @@ ash@ubuntu:~/Projects/ntlg$ docker rmi node:15.14
 
 ash@ubuntu:~/Projects/ntlg$ docker images
     REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+    

@@ -1,0 +1,36 @@
+ash@ubuntu:~/Projects/ntlg$ docker run --name first_node -it -v ${PWD}/data:/var/firs
+t/data node:15.14 /bin/bash
+
+ash@ubuntu:~/Projects/ntlg$ docker run --name second_node -it -v ${PWD}/data:/var/second/data node:15.14
+
+ash@ubuntu:~/Projects/ntlg$ docker ps
+
+    CONTAINER ID   IMAGE        COMMAND                  CREATED              STATUS              PORTS     NAMES
+    b36919aa8387   node:15.14   "docker-entrypoint.s…"   About a minute ago   Up About a minute             second_node
+    302c4bc5b081   node:15.14   "docker-entrypoint.s…"   13 minutes ago       Up 13 minutes                 first_node
+
+ash@ubuntu:~/Projects/ntlg$ docker exec -it first_node /bin/bash
+root@302c4bc5b081:/# echo "My text fron first_node">var/first/data/text.txt
+
+ash@ubuntu:~/Projects/ntlg$ docker exec -it second_node ls /var/second/data
+
+    text.txt  text2.txt
+
+ash@ubuntu:~/Projects/ntlg$ docker exec -it second_node /bin/bash
+
+root@b36919aa8387:/# ls
+
+    bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@b36919aa8387:/# cd var/second/data
+root@b36919aa8387:/var/second/data# ls
+
+    text.txt  text2.txt
+
+root@b36919aa8387:/var/second/data# cat text.txt 
+
+    My text fron first_node
+
+root@b36919aa8387:/var/second/data# cat text2.txt
+
+    Hostroot@b36919aa8387:/var/second/data# 
