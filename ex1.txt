@@ -1,0 +1,98 @@
+ash@ubuntu:~/Projects/ntlg$ docker pull busybox
+
+    Using default tag: latest
+    latest: Pulling from library/busybox
+    3f4d90098f5b: Pull complete 
+    Digest: sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
+    Status: Downloaded newer image for busybox:latest
+    docker.io/library/busybox:latest
+
+ash@ubuntu:~/Projects/ntlg$ docker run --name pinger -it busybox ping -c 7 netology.ru
+
+    PING netology.ru (188.114.99.234): 56 data bytes
+    64 bytes from 188.114.99.234: seq=0 ttl=55 time=3.466 ms
+    64 bytes from 188.114.99.234: seq=1 ttl=55 time=3.162 ms
+    64 bytes from 188.114.99.234: seq=2 ttl=55 time=4.962 ms
+    64 bytes from 188.114.99.234: seq=3 ttl=55 time=4.788 ms
+    64 bytes from 188.114.99.234: seq=4 ttl=55 time=2.923 ms
+    64 bytes from 188.114.99.234: seq=5 ttl=55 time=4.769 ms
+    64 bytes from 188.114.99.234: seq=6 ttl=55 time=2.868 ms
+
+    --- netology.ru ping statistics ---
+    7 packets transmitted, 7 packets received, 0% packet loss
+    round-trip min/avg/max = 2.868/3.848/4.962 ms
+
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+
+    CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+    037cae72ff84   busybox   "ping -c 7 netology.…"   10 seconds ago   Exited (0) 4 seconds ago             pinger
+
+ash@ubuntu:~/Projects/ntlg$ docker logs pinger
+
+    PING netology.ru (188.114.99.234): 56 data bytes
+    64 bytes from 188.114.99.234: seq=0 ttl=55 time=3.466 ms
+    64 bytes from 188.114.99.234: seq=1 ttl=55 time=3.162 ms
+    64 bytes from 188.114.99.234: seq=2 ttl=55 time=4.962 ms
+    64 bytes from 188.114.99.234: seq=3 ttl=55 time=4.788 ms
+    64 bytes from 188.114.99.234: seq=4 ttl=55 time=2.923 ms
+    64 bytes from 188.114.99.234: seq=5 ttl=55 time=4.769 ms
+    64 bytes from 188.114.99.234: seq=6 ttl=55 time=2.868 ms
+
+    --- netology.ru ping statistics ---
+    7 packets transmitted, 7 packets received, 0% packet loss
+    round-trip min/avg/max = 2.868/3.848/4.962 ms
+
+ash@ubuntu:~/Projects/ntlg$ docker start pinger
+
+    pinger
+
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+
+    CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                              PORTS     NAMES
+    037cae72ff84   busybox   "ping -c 7 netology.…"   37 seconds ago   Exited (0) Less than a second ago             pinger
+
+ash@ubuntu:~/Projects/ntlg$ docker logs pinger
+
+    PING netology.ru (188.114.99.234): 56 data bytes
+    64 bytes from 188.114.99.234: seq=0 ttl=55 time=3.466 ms
+    64 bytes from 188.114.99.234: seq=1 ttl=55 time=3.162 ms
+    64 bytes from 188.114.99.234: seq=2 ttl=55 time=4.962 ms
+    64 bytes from 188.114.99.234: seq=3 ttl=55 time=4.788 ms
+    64 bytes from 188.114.99.234: seq=4 ttl=55 time=2.923 ms
+    64 bytes from 188.114.99.234: seq=5 ttl=55 time=4.769 ms
+    64 bytes from 188.114.99.234: seq=6 ttl=55 time=2.868 ms
+
+    --- netology.ru ping statistics ---
+    7 packets transmitted, 7 packets received, 0% packet loss
+    round-trip min/avg/max = 2.868/3.848/4.962 ms
+    PING netology.ru (188.114.98.234): 56 data bytes
+    64 bytes from 188.114.98.234: seq=0 ttl=54 time=3.934 ms
+    64 bytes from 188.114.98.234: seq=1 ttl=54 time=3.059 ms
+    64 bytes from 188.114.98.234: seq=2 ttl=54 time=4.899 ms
+    64 bytes from 188.114.98.234: seq=3 ttl=54 time=5.019 ms
+    64 bytes from 188.114.98.234: seq=4 ttl=54 time=5.069 ms
+    64 bytes from 188.114.98.234: seq=5 ttl=54 time=4.757 ms
+    64 bytes from 188.114.98.234: seq=6 ttl=54 time=4.769 ms
+
+    --- netology.ru ping statistics ---
+    7 packets transmitted, 7 packets received, 0% packet loss
+    round-trip min/avg/max = 3.059/4.500/5.069 ms
+
+ash@ubuntu:~/Projects/ntlg$ docker rm pinger
+
+    pinger
+
+ash@ubuntu:~/Projects/ntlg$ docker rmi busybox
+
+    Untagged: busybox:latest
+    Untagged: busybox@sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79
+    Deleted: sha256:a416a98b71e224a31ee99cff8e16063554498227d2b696152a9c3e0aa65e5824
+    Deleted: sha256:3d24ee258efc3bfe4066a1a9fb83febf6dc0b1548dfe896161533668281c9f4f
+
+ash@ubuntu:~/Projects/ntlg$ docker ps -a
+
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+ash@ubuntu:~/Projects/ntlg$ docker images
+
+    REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
