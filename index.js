@@ -1,4 +1,4 @@
-// переделать для API
+
 const express = require('express');
 const userRouter = require('./routes/login');
 const booksRouter = require('./routes/books');
