@@ -1,9 +1,9 @@
 
 const express = require('express');
-const userRouter = require('./routes/login');
-const booksRouter = require('./routes/books');
-const error404 = require('./middleware/err-404');
-const indexRouter = require('./routes/index');
+const userRouter = require('../routes/login');
+const booksRouter = require('../routes/books');
+const error404 = require('../middleware/err-404');
+const indexRouter = require('../routes/index');
 
 app = express();
 app.use(express.json());
