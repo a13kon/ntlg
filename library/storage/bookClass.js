@@ -9,6 +9,7 @@ class Book {
         fileCover = "", 
         fileName = "",
         fileBook = "",
+        viewsCounter = 0,
         id = uuid()) {
             this.id = id;
             this.title = title;
@@ -18,6 +19,7 @@ class Book {
             this.fileCover = fileCover;
             this.fileName = fileName;
             this.fileBook = fileBook;
+            this.viewsCounter = viewsCounter;
     };
 };
 

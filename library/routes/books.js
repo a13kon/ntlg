@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const request = require('request');
 const {stor} = require('../storage/stor');
 const fileMulter = require('../middleware/file');
 const {Book} = require('../storage/bookClass');
 
-
+const COUNTER_URL = process.env.COUNTER_URL || "http://localhost";
+const COUNTER_PORT = process.env.COUNTER_PORT || 3001;
 
 router.get('/', (req, res) => {
     const {book} = stor;
@@ -33,9 +35,35 @@ router.get('/:id', (req, res) => {
     const {book} = stor;
     const {id} = req.params;
     const idx = book.findIndex( el => el.id === id);
+    
 
     if (idx !== -1) {
-        res.json(book[idx]);
+
+        request.post(
+            { url: `${COUNTER_URL}:${COUNTER_PORT}/counter/${id}/incr`},
+            async (err, response, body) => {
+                if (err) 
+                return res 
+                    .status(500)
+                    .json(`counter error ${err}`);
+                const res = await response;
+            }
+        );
+ 
+        request(
+            `${COUNTER_URL}:${COUNTER_PORT}/counter/${id}`,
+            (err, response, body) => {
+                if (err) 
+                    return res 
+                        .status(500)
+                        .json(`counter error ${err}`);
+                
+                book[idx].viewsCounter = body;
+                return res.json(book[idx]);    
+            }
+        );
+        
+
     } else {
         res.status(404);
         res.json('404 | not found');
