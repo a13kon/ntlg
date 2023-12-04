@@ -5,7 +5,7 @@ const request = require('request');
 
 router.get('/', (req, res) => {
     request(
-        'http://localhost:3001/myname',
+        'http://localhost:3001/counter/123',
         (err, response, body) => {
             if (err) 
                 return res

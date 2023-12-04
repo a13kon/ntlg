@@ -1,13 +1,11 @@
 const express = require('express');
+const counter = require('../routes/counter');
 
-const app = express();
+app = express();
+
+app.use('/counter', counter);
 
 const PORT = process.env.PORT || 3001;
-
-app.get('/:name', (req, res) => {
-    const { name } = req.params;
-    res.json(`Your name is ${name}`);
-});
 
 app.listen(PORT, () => {
     console.log(`counter is listening on port ${PORT}`)
