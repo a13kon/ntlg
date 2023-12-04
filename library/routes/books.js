@@ -6,7 +6,6 @@ const fileMulter = require('../middleware/file');
 const {Book} = require('../storage/bookClass');
 
 const COUNTER_URL = process.env.COUNTER_URL || "http://localhost";
-const COUNTER_PORT = process.env.COUNTER_PORT || 3001;
 
 router.get('/', (req, res) => {
     const {book} = stor;
@@ -35,30 +34,31 @@ router.get('/:id', (req, res) => {
     const {book} = stor;
     const {id} = req.params;
     const idx = book.findIndex( el => el.id === id);
+    const regExp = /\"|\\/g
     
 
     if (idx !== -1) {
 
         request.post(
-            { url: `${COUNTER_URL}:${COUNTER_PORT}/counter/${id}/incr`},
-            async (err, response, body) => {
+            { url: `${COUNTER_URL}/counter/${id}/incr`},
+            (err, response, body) => {
                 if (err) 
                 return res 
                     .status(500)
                     .json(`counter error ${err}`);
-                const res = await response;
+                const res = response;
             }
         );
- 
+  
         request(
-            `${COUNTER_URL}:${COUNTER_PORT}/counter/${id}`,
+            `${COUNTER_URL}/counter/${id}`,
             (err, response, body) => {
-                if (err) 
+                if (err)  
                     return res 
                         .status(500)
                         .json(`counter error ${err}`);
                 
-                book[idx].viewsCounter = body;
+                book[idx].viewsCounter = body.replace(regExp, '');
                 return res.json(book[idx]);    
             }
         );

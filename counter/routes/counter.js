@@ -1,16 +1,36 @@
 const express = require ('express');
 const router = express.Router();
+const redis = require('redis');
 
-let test = 0;
+const REDIS_URL = process.env.REDIS_URL || "localhost";
 
-router.get('/:bookId', (req, res) => {
+const client = redis.createClient({url: REDIS_URL});
+
+(async () => {
+    await client.connect()
+})();
+
+
+router.get('/:bookId', async (req, res) => {
     const { bookId } = req.params;
-    res.json(`book ID is ${test}`);
+
+    try {
+        const cnt = await client.get(bookId);
+        res.json(cnt);
+    } catch (e) {
+        res.json({errorcode: 500, errmsg: `reddis errod: ${e}`});
+    }
 });
 
-router.post('/:bookId/incr', (req, res) => {
-    test++;
-    res.status(201);
+router.post('/:bookId/incr', async(req, res) => {
+    const { bookId } = req.params;
+
+    try {
+        const cnt = await client.incr(bookId);
+        res.status(201);
+    } catch (e) {
+        res.json({errorcode: 500, errmsg: `reddis errod: ${e}`});
+    }
 });
 
 module.exports = router;
