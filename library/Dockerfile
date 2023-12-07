@@ -2,16 +2,10 @@ FROM node:20.10-alpine
 
 WORKDIR /app
 
-ARG NODE_ENV=prodaction
+COPY . /app/
 
-COPY ./package*.json ./
+ARG NODE_ENV=production
 
-RUN npm install
-
-COPY ./booksFiles booksFiles/
-COPY ./middleware middleware/
-COPY ./routes routes/
-COPY ./src src/
-COPY ./storage storage/
+RUN npm install && npm build
 
 CMD ["npm", "run", "server"]
