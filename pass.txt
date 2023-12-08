@@ -1,9 +1,0 @@
-p8hRS5R7RDvkg1pM alexshm13
-vqLJK2unY7peOqix admin
-xkihmm5t9kCWSapm user
-
-npm install mongodb
-
-mongodb+srv://<username>:<password>@cluster0.impemor.mongodb.net/?retryWrites=true&w=majority
-
-mongodb+srv://<username>:<password>@cluster0.impemor.mongodb.net/

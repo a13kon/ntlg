@@ -13,8 +13,8 @@ app.use(errorMiddleware);
 
 async function start(PORT, UrlDB) {
     try {
-        await mongoose.connect('mongodb://root:example@localhost:27017', {
-            dbName: "demo"
+        await mongoose.connect(UrlDB, {
+            dbName: 'demo'
         });
         app.listen(PORT);
     } catch (e) {
@@ -22,6 +22,6 @@ async function start(PORT, UrlDB) {
     };
 };
 
-const UrlDB = process.env.UrlDB;
+const UrlDB = process.env.UrlDB
 const PORT = process.env.PORT || 3000;
-start(PORT, UrlDB);
+start(PORT, UrlDB); 
