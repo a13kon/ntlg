@@ -15,21 +15,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
-  storage:
-    image: redis
-    volumes: 
-      - ./counter/data:/data
-  counter: 
-    build: 
-      context: ./counter
-      dockerfile: Dockerfile
-    working_dir: /app
-    environment:
-      - PORT=80
-      - REDIS_URL=redis://storage
-    command: npm run server
-    depends_on:
-      - storage
+
   library:
     build: 
       context: ./library
@@ -43,5 +29,3 @@ services:
       - PORT=3000
       - COUNTER_URL=http://counter
     command: npm run server
-    depends_on:
-      - counter
