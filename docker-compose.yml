@@ -26,6 +26,7 @@ services:
     ports:
       - 80:3000
     environment:
+      - UrlDB=mongodb://root:example@mongo:27017/
       - PORT=3000
       - COUNTER_URL=http://counter
     command: npm run server
