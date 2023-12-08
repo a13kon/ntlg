@@ -12,31 +12,57 @@ const COUNTER_URL = process.env.COUNTER_URL || "http://localhost";
 router.get('/', async (req, res) => {
     try{
         const book = await Book.find().select('-__v');
-    } catch(e) {
+        res.json(book);
+    } catch (e) {
         res.status(500).json(e);
     }
-
-    const {book} = stor;
-    res.json(book);
 });
 
-router.post('/', fileMulter.single('fileBook'),
-(req, res) => {
-        const {book} = stor;
-        const {title, desc, authors, favorite, fileCover, fileName} = req.body;
-        const newBook = new Book(title, desc, authors, favorite, fileCover, fileName);
-    
+router.post('/', fileMulter.single('fileBook'), 
+    async (req, res) => {
+        const {title, description, authors, favorite, fileCover, fileName} = req.body;
+        let fileBook = "";
         if(req.file){
             const {path} = req.file;
-            newBook.fileBook = path;
+            fileBook = path;
         };
         
-        book.push(newBook);
-        
-        res.status(201);
-        res.json(book);
+        const newBook = new Book({
+                                    title, 
+                                    description, 
+                                    authors, 
+                                    favorite, 
+                                    fileCover, 
+                                    fileName,
+                                    fileBook
+                                });
+        try {
+            await newBook.save();
+            res.json(newBook);
+        } catch (e) {
+            res.status(500).json(e);
+        }
     
 });
+
+// router.post('/', fileMulter.single('fileBook'),
+// async (req, res) => {
+//         const {title, description, authors, favorite, fileCover, fileName} = req.body;
+//         let fileBook = "";
+//         if(req.file){
+//             const {path} = req.file;
+//             fileBook = path;
+//         };
+        
+//         const newBook = new Book(title, description, authors, favorite, fileCover, fileName, fileBook);
+//         try {
+//             await newBook.save();
+//             res.json(newBook);
+//         } catch (e) {
+//             res.status(500).json(e);
+//         }
+    
+// });
 
 router.get('/:id', (req, res) => {
     const {book} = stor;

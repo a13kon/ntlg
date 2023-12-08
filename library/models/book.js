@@ -24,6 +24,9 @@ const bookSchema = new Schema ({
     fileName: {
         type: String,
         default: "",
+    },
+    fileBook: {
+        type: String,
     }
 });
 
