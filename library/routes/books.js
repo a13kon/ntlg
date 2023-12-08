@@ -1,13 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-const {stor} = require('../storage/stor');
 const fileMulter = require('../middleware/file');
-const {Book} = require('../storage/bookClass');
+//const {stor} = require('../storage/stor');
+//const {Book} = require('../storage/bookClass');
+
+const Book = require('../models/book');
 
 const COUNTER_URL = process.env.COUNTER_URL || "http://localhost";
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    try{
+        const book = await Book.find().select('-__v');
+    } catch(e) {
+        res.status(500).json(e);
+    }
+
     const {book} = stor;
     res.json(book);
 });
