@@ -11,6 +11,6 @@ router.get('/', (req, res) => {
         deleteBook: "DELETE api/books/:id",
         downloadBook: "GET api/books/:id/download"
     });
-});
+}); 
 
 module.exports = router;
