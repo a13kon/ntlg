@@ -77,7 +77,6 @@ router.post('/signup', async (req, res, next) => {
             res.json(e);
         }
     } else {
-        
         res.redirect('/user/signup');
     }
  
