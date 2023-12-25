@@ -6,13 +6,23 @@ const Book = require('../models/book');
 router.get('/', async (req, res) => {
     try{
         const book = await Book.find().select('-__v');
-        res.json(book);
+        res.render("books/index", {
+            title: "Книги",
+            books: book,
+        })
     } catch (e) {
-        res.status(500).json(e);
+        res.redirect('/404');
     };
 });
 
-router.post('/', fileMulter.single('fileBook'), 
+router.get('/create', (req, res) => {
+    res.render("books/create", {
+        title: "Создание записи",
+        book: {},
+    });
+});
+
+router.post('/create', fileMulter.single('fileBook'), 
     async (req, res) => {
         const {title, description, authors, favorite, fileCover, fileName} = req.body;
         let fileBook = "";
@@ -32,9 +42,9 @@ router.post('/', fileMulter.single('fileBook'),
                                 });
         try {
             await newBook.save();
-            res.json(newBook);
+            res.redirect('/api/books');
         } catch (e) {
-            res.status(500).json(e);
+            res.redirect('/404');
         };
     
 });
@@ -45,13 +55,31 @@ router.get('/:id', async(req, res) => {
     
     try{
         const book = await Book.findById(id).select('-__v');
-        res.json(book);
+        res.render("books/view", {
+            title: "Информация о книге",
+            book: book,
+        });
     } catch (e) {
-        res.status(500).json(e);
+        res.redirect('/404');
     };
 });
 
-router.put('/:id', fileMulter.single('fileBook'), async (req, res) => {
+router.get('/update/:id', async (req, res) => {
+    const {id} = req.params;
+
+    try{
+        const book = await Book.findById(id).select('-__v');
+        res.render("books/update", {
+            title: "Редактор информации",
+            book: book,
+        });
+    } catch (e) {
+        res.redirect('/404');
+    }
+
+});
+
+router.post('/update/:id', fileMulter.single('fileBook'), async (req, res) => {
     const {title, description, authors, favorite, fileCover, fileName} = req.body;
     const {id} = req.params;
 
@@ -72,19 +100,19 @@ router.put('/:id', fileMulter.single('fileBook'), async (req, res) => {
         });
         res.redirect(`/api/books/${id}`);
     } catch (e) {
-        res.status(500).json(e)
+        res.redirect('/404');
     };
 
 });
 
-router.delete('/:id', async(req, res) => {
+router.post('/delete/:id', async(req, res) => {
     const {id} = req.params;
 
     try {
         await Book.deleteOne({_id: id});
         res.redirect('/api/books/')
     } catch (e) {
-        res.status(500).json(e);
+        res.redirect('/404');
     }
 });    
 
