@@ -9,8 +9,6 @@ const http = require('http');
 const socketIO = require('socket.io');
 
 
-
-
 app = express();
 const server = http.Server(app);
 const io = socketIO(server);
@@ -24,6 +22,8 @@ app.use(session({secret: 'SECRET'}));
 app.use('/', indexRouter);
 app.use('/api/books', booksRouter);
 app.use('/user', userRouter);
+
+
 
 
 io.on('connection', (socket) => {

@@ -2,15 +2,27 @@ const express = require('express');
 const router = express.Router();
 const fileMulter = require('../middleware/file');
 const Book = require('../models/book');
+const passport = require('passport');
 
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 
 router.get('/', async (req, res) => {
     try{
+        let login;
+        if (req.user) {
+            login = req.user.username;
+        } else {
+            login = undefined;
+        }
+
         const book = await Book.find().select('-__v');
         res.render("books/index", {
             title: "Книги",
             books: book,
+            login: login,
         })
     } catch (e) {
         res.redirect('/404');

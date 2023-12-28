@@ -1,6 +1,11 @@
+<%- include('./port/layout-start', {title: title}) %>
+<%- include('./port/menu') %>
+
 <p>
     <b>ID:</b>         <%= user.id %><br />
     <b>Username:</b>   <%= user.username %><br />
 
 </p>
 <a href="/user/logout">Выйти</a>
+
+<%- include('./port/layout-end') %>

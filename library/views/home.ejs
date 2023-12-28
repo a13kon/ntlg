@@ -1,8 +1,12 @@
+<%- include('./port/layout-start', {title: title}) %>
+<%- include('./port/menu') %>
+
 <% if (!user) { %>
-    <p>Главная</p> 
     <p>Пожалуйста, <a href="/user/login"> авторизуйтесь </a></p>
     <p>или <a href="/user/signup"> зарегистрируйтесь </a></p>
 <% } else { %>
     <p>Привет, <%= user.username %>. </p>
     <p>Перейти в <a href="/user/me">профиль</a>.</p>
 <% } %>
+
+<%- include('./port/layout-end') %>

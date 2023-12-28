@@ -43,11 +43,16 @@ passport.deserializeUser(async function(id, done) {
 
 
 router.get('/',  (req, res) => {
-    res.render('home', { user: req.user });
+    res.render('home', { 
+        user: req.user,
+        title: "Авторизация", 
+    });
 });
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', {
+        title: "Авторизация", 
+    });
 });
 
 router.post('/login', 
@@ -92,12 +97,15 @@ router.get('/me',
     },
     (req, res) => {
         res.render('profile', {
-            user: req.user
+            user: req.user,
+            title: "Авторизация", 
         })
 });
 
 router.get('/signup', (req, res, next) =>{
-    res.render('signup');
+    res.render('signup', {
+        title: "Авторизация", 
+    });
 });
 
 module.exports = router;

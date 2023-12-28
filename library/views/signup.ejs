@@ -1,3 +1,6 @@
+<%- include('./port/layout-start', {title: title}) %>
+<%- include('./port/menu') %>
+
 <h1>Регистрация</h1>
 <form action="/user/signup" method="post">
     <section>
@@ -10,3 +13,5 @@
     </section>
     <button type="submit">Зарегистрироваться</button>
 </form>
+
+<%- include('./port/layout-end') %>
