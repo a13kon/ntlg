@@ -84,7 +84,7 @@ router.post('/signup', async (req, res, next) => {
     } else {
         res.redirect('/user/signup');
     }
-    
+        
 });
             
 
